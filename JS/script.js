@@ -13,7 +13,7 @@ var cardArray = [];
 function createCard(card){
 	var counter = 0;
 	for(var i = 6; i < 16; i++){
-		cardArray.push({"Name": card[i].name, "Gender": card[i].gender})
+		cardArray.push({"Name": card[i].name, "Gender": card[i].gender, "Image": "../img/token-0"+ counter +".png" })
 		cards.innerHTML += "<div class='card__character' data-name='" + card[i].name + "'><div class='card__details'><img class='card__token' src='../img/token-0"+ counter +".png'><p class='card__charName'>" + card[i].name + "</p>"+ "<p class='card__gender'>" + card[i].gender + "</p>" + "<p class='card__gender'>" + card[i].culture + "</p></div></div>"	
 		if(i % 2){
 			counter += 1
@@ -59,19 +59,19 @@ function saveChosenCards() {
 	var savedCards = [];
 	var storage = [];
 	var selectedCharacters = document.querySelectorAll(".checked");
-
+	//var cardImg;
 	var chosenPlayers = Array.from(selectedCharacters);
-
-	chosenPlayers.forEach(function(chosen, index){
+	console.log(chosenPlayers)
+	chosenPlayers.forEach((chosen, index)=>{
 		savedCards.push(chosen.dataset.name);
 	})
-
-	cardArray.forEach(function(card, index){
-
+	console.log(savedCards)
+	cardArray.forEach((card, index) =>{
 		if(savedCards.includes(card.Name)){
 			storage.push(card);
 		}
 	})
-
+	console.log("storage ",storage)
 	localStorage.setItem("Token", JSON.stringify(storage));	
 }
+saveChosenCards()

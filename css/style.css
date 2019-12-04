@@ -111,9 +111,9 @@ header p {
   text-align: center;
 }
 .board {
-  height: 1024px;
-  width: 1024px;
-  margin: 2rem auto;
+  height: 91%;
+  width: 80%;
+  margin: auto;
   outline: 3px solid #111;
   background: #333;
   display: grid;
@@ -122,9 +122,10 @@ header p {
   grid-gap: 0.5rem;
 }
 .board__tile {
-  width: 110px;
-  height: 110px;
-  background: gold;
+  width: 183px;
+  height: 140px;
+  background: #c7b299;
+  background-image: url(../../img/dark-denim-3.png);
 }
 .board__center {
   grid-column: 2 / 8;
@@ -133,10 +134,9 @@ header p {
   /*grid-template-columns: subgrid;*/
   grid-template-rows: repeat(3, 1fr);
 }
-.board__player {
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  border: 1px solid;
+.board__player img {
+  display: block;
+  margin: auto;
+  width: 110px;
+  height: auto;
 }
