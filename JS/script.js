@@ -12,9 +12,16 @@ var cardArray = [];
 
 function createCard(card){
 	var counter = 0;
-	for(var i = 6; i < 16; i++){
-		cardArray.push({"Name": card[i].name, "Gender": card[i].gender, "Image": "../img/token-0"+ counter +".png" })
-		cards.innerHTML += "<div class='card__character' data-name='" + card[i].name + "'><div class='card__details'><img class='card__token' src='../img/token-0"+ counter +".png'><p class='card__charName'>" + card[i].name + "</p>"+ "<p class='card__gender'>" + card[i].gender + "</p>" + "<p class='card__gender'>" + card[i].culture + "</p></div></div>"	
+	const playCard = [];
+	console.log(card);
+	card.forEach(char =>{
+		if(char.culture){
+			playCard.push(char)
+		}
+	})
+	for(var i = 0; i < 10; i++){
+		cardArray.push({"Name": playCard[i].name, "Gender": playCard[i].gender, "Image": "../img/token-0"+ counter +".png"})
+		cards.innerHTML += "<div class='card__character' data-name='" + playCard[i].name + "'><div class='card__details'><img class='card__token' src='../img/token-0"+ counter +".png'><p class='card__charName'>" + playCard[i].name + "</p>"+ "<p class='card__gender'>Gender: " + playCard[i].gender + "</p>" + "<p class='card__gender'>Culture: " + playCard[i].culture + "</p></div></div>"	
 		if(i % 2){
 			counter += 1
 		}

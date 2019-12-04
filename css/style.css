@@ -94,21 +94,30 @@ header p {
 }
 .card__character {
   display: inline-block;
-  width: 200px;
+  width: 216px;
+  height: 280px;
   margin: 10px;
-  background-image: url(../../img/card1.jpg);
+  padding-top: 10px;
+  background-image: url(../../img/card-0-01.png);
   background-size: cover;
 }
 .card__token {
-  width: 70%;
+  width: 60%;
   height: auto;
-  margin-left: 15%;
+  margin-top: 5px;
+  margin-left: 22%;
 }
 .card__charName {
   text-align: center;
+  font-weight: 600;
+  font-size: 18px;
 }
 .card__gender {
   text-align: center;
+  font-weight: 600;
+  margin: 0 2px;
+  font-size: 14px;
+  padding: 0px 5px;
 }
 .board {
   height: 91%;
@@ -139,4 +148,9 @@ header p {
   margin: auto;
   width: 110px;
   height: auto;
+}
+.board__dice {
+  width: 100px;
+  height: 100px;
+  background-color: none;
 }

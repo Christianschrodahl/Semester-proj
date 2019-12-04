@@ -13,16 +13,17 @@
 
 <body>
 	<main class="container">
-		<button onclick=rollDice()>Roll Dice</button>
 		<div class="board">
-		<div class="board__center"></div>
-		<div class="board__tile" data-p="1"></div>
+		<div class="board__center">
+		<div class="board__dice" onclick="roleDice()"><canvas id="canvas"></canvas></div>
+		</div>
+		<div class="board__tile" data-p="1"><p>STRART</p></div>
 		<div class="board__tile" data-p="2"></div>
 		<div class="board__tile" data-p="3"></div>
 		<div class="board__tile" data-p="4"></div>
 		<div class="board__tile" data-p="5"></div>
 		<div class="board__tile" data-p="6"></div>
-		<div class="board__tile" data-p="7"></div>
+		<div class="board__tile" data-p="7"><p>Go back steps</p></div>
 		<div class="board__tile" data-p="8"></div>
 		<div class="board__tile" data-p="24"></div>
 		<div class="board__tile" data-p="9"></div>
@@ -32,16 +33,17 @@
 		<div class="board__tile" data-p="11"></div>
 		<div class="board__tile" data-p="21"></div>
 		<div class="board__tile" data-p="12"></div>
-		<div class="board__tile" data-p="20"></div>
+		<div class="board__tile" data-p="20"><p>Go back steps</p></div>
 		<div class="board__tile" data-p="19"></div>
 		<div class="board__tile" data-p="18"></div>
 		<div class="board__tile" data-p="17"></div>
 		<div class="board__tile" data-p="16"></div>
 		<div class="board__tile" data-p="15"></div>
 		<div class="board__tile" data-p="14"></div>
-		<div class="board__tile" data-p="13"></div>
+		<div class="board__tile" data-p="13"><p>Go back steps</p></div>
 	</div>
 	</main>
+	<script src="js/dice.js"></script>
 	<script src="js/bordGame.js"></script>
 </body>
 
