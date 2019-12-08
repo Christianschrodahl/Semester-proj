@@ -132,7 +132,7 @@ async function animation() {
 	}
 }
 animation()
-
+rolled(width / 2 - 15, height / 2 + 20, counter)
 function rolled(x, y, count) {
 	return new Promise(resolve => {
 		ctx.beginPath();
@@ -162,3 +162,4 @@ window.roleDice = () => {
 		hasWon = true;
 	}
 }
+

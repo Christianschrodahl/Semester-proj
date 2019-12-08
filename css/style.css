@@ -10,7 +10,7 @@
   font-style: normal;
   font-weight: 200;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/rokkitt/v15/qFdb35qfgYFjGy5hukqqhw5XeRgdi1pyd6DMGbo.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/rokkitt/v17/qFdb35qfgYFjGy5hukqqhw5XeRgdi1pyd6DMGbo.ttf) format('truetype');
 }
 html,
 body {
@@ -30,23 +30,49 @@ a {
   font-weight: 200;
   margin: 0;
 }
+@media only screen and (min-width: 720px) and (max-width: 1240px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  a {
+    text-shadow: 2px 0px #B37F10;
+  }
+}
+@media only screen and (max-width: 720px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  a {
+    text-shadow: 2px 0px #B37F10;
+  }
+}
 p {
   font-family: 'Open Sans';
 }
 h1 {
-  font-size: 90px;
+  font-size: 6vw;
 }
 h2 {
-  font-size: 65px;
+  font-size: 4vw;
 }
 a {
-  font-size: 50px;
+  font-size: 3.5vw;
 }
 header {
   width: 1200px;
   margin: auto;
-  position: relative;
-  top: 10%;
+}
+@media only screen and (min-width: 720px) and (max-width: 1240px) {
+  header {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 720px) {
+  header {
+    width: 90%;
+  }
 }
 header a {
   display: block;
@@ -64,33 +90,83 @@ header p {
   margin: 25px auto;
   text-align: center;
 }
+@media only screen and (min-width: 720px) and (max-width: 1240px) {
+  header p {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 720px) {
+  header p {
+    width: 80%;
+  }
+}
 #modal {
   display: none;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
   margin: auto;
+  text-align: center;
   background-color: rgba(0, 0, 0, 0.9);
+}
+@media only screen and (min-width: 720px) and (max-width: 1240px) {
+  #modal {
+    background-color: #000;
+  }
+}
+@media only screen and (max-width: 720px) {
+  #modal {
+    background-color: #000;
+  }
 }
 #modal .start_btn {
   display: block;
   position: relative;
   top: 15%;
 }
+@media only screen and (min-width: 720px) and (max-width: 1240px) {
+  #modal .start_btn {
+    position: fixed;
+    top: initial;
+    bottom: 5%;
+    right: 1%;
+    font-size: 3vw;
+  }
+}
+@media only screen and (max-width: 720px) {
+  #modal .start_btn {
+    position: fixed;
+    top: initial;
+    bottom: 5%;
+    right: 1%;
+  }
+}
 .container {
   background-image: url(../../img/brown-open-field-2305169.jpg);
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
-  padding-top: 15px;
   margin: auto;
+  display: flex;
 }
 .card {
   width: 1200px;
   margin: auto;
   position: relative;
   top: 10%;
+}
+@media only screen and (min-width: 720px) and (max-width: 1240px) {
+  .card {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 720px) {
+  .card {
+    width: 90%;
+    margin-left: initial;
+    margin-right: auto;
+  }
 }
 .card__character {
   display: inline-block;
@@ -100,12 +176,12 @@ header p {
   padding-top: 10px;
   background-image: url(../../img/card-0-01.png);
   background-size: cover;
+  vertical-align: bottom;
 }
 .card__token {
   width: 60%;
   height: auto;
   margin-top: 5px;
-  margin-left: 22%;
 }
 .card__charName {
   text-align: center;
@@ -119,9 +195,15 @@ header p {
   font-size: 14px;
   padding: 0px 5px;
 }
+.card__selectedPlayer1 {
+  border: 4px solid red;
+}
+.card__selectedPlayer2 {
+  border: 4px solid blue;
+}
 .board {
   height: 91%;
-  width: 80%;
+  width: 1520px;
   margin: auto;
   outline: 3px solid #111;
   background: #333;
@@ -148,9 +230,9 @@ header p {
   margin: auto;
   width: 110px;
   height: auto;
+  background-size: contain;
 }
 .board__dice {
   width: 100px;
   height: 100px;
-  background-color: none;
 }
