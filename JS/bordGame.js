@@ -1,7 +1,6 @@
 //players
 var getPlayer = localStorage.getItem("Token");
 var Players = JSON.parse(getPlayer);
-console.log(Players);
 Players.forEach((player, index) => {
 	player["player"] = (index == 0) ? "Player1" : "Player2";
 	player["position"] = 0;
@@ -30,19 +29,18 @@ const renderBoard = () => {
 			var square = document.querySelectorAll(".board__tile");
 			var tiles = Array.from(square);
 			Players.forEach((player, index) => {
-				console.log(player)
 				for (let i = tiles.length - 1; i >= 0; i--) {
 					var playerTile = tiles[i].childNodes;
 					playerTile.forEach(function (tileElm) {
 						if (!tileElm.classList.length == 0) {
-							console.log(tileElm.classList, player.player)
 							if (tileElm.classList.contains(player.player)) {
 								tileElm.remove();
 							}
 						}
 					});
 					if (tiles[i].dataset.p == player.position) {
-						tiles[i].innerHTML = `<div class="board__player ${player.player}"><img src="${player.border}" style="background-Image:url(${player.savedCards.Image})"></div>`
+						tiles[i].innerHTML += `<div class="board__player ${player.player}"><img src="${player.border}" style="background-Image:url(${player.savedCards.Image})"></div>`
+						
 					}
 				}
 				traps.forEach(trap => {
