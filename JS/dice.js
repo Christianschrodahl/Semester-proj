@@ -143,7 +143,7 @@ function rolled(x, y, count) {
 }
 var intervalID;
 var hasWon = false;
-window.roleDice = () => {
+window.roleDice = () =222222222222> {
 	const max = 2;
 	const roll = Math.ceil(Math.random() * max);
 	x = 0

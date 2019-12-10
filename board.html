@@ -7,7 +7,6 @@
 	<title></title>
 	<meta name="description" content="The HTML5 Herald">
 	<meta name="author" content="SitePoint">
-
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -15,7 +14,9 @@
 	<main class="container">
 		<div class="board">
 		<div class="board__center">
-		<div class="board__dice" onclick="roleDice()"><canvas id="canvas"></canvas></div>
+		<!--<div class="board__dice" onclick="roleDice()"><canvas id="canvas"></canvas></div>-->
+			<canvas id="can"></canvas>
+			<button>Roll</button>
 		</div>
 		<div class="board__tile" data-p="1"><p>STRART</p></div>
 		<div class="board__tile" data-p="2"></div>
@@ -43,8 +44,11 @@
 		<div class="board__tile" data-p="13"><img src="img/hole-tile-01-01.png" style="width: 100%; height: auto;"></div>
 	</div>
 	</main>
+	<script src="anime.min.js"></script>
+	<script src="zdog.dist.min.js"></script>
 	<script src="js/dice.js"></script>
 	<script src="js/bordGame.js"></script>
+	<script src="js/dice2.js"></script>
 </body>
 
 </html>
