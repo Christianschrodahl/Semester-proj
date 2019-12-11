@@ -1,14 +1,15 @@
-//players
+// Get chosen Players
 var getPlayer = localStorage.getItem("Token");
 var Players = JSON.parse(getPlayer);
 Players.forEach((player, index) => {
 	player["player"] = (index == 0) ? "Player1" : "Player2";
 	player["position"] = 0;
-	player["border"] = (index == 0) ? "img/player1_border-01.png" : "img/player2_border-01.png"
+	player["border"] = (index == 0) ? "img/player1_border-01.png" : "img/player2_border-02.png"
 })
 
 let currentPlayerTurn = 0;
 
+//Traps
 const traps = [{
 	start: 7,
 	end: 4
@@ -24,36 +25,36 @@ const boardSize = 50;
 
 //render board function
 const renderBoard = () => {
-	return new Promise(resolve => {
-		setTimeout(() => {
-			var square = document.querySelectorAll(".board__tile");
-			var tiles = Array.from(square);
-			Players.forEach((player, index) => {
-				for (let i = tiles.length - 1; i >= 0; i--) {
-					var playerTile = tiles[i].childNodes;
-					playerTile.forEach(function (tileElm) {
-						if (!tileElm.classList.length == 0) {
-							if (tileElm.classList.contains(player.player)) {
-								tileElm.remove();
-							}
+	setTimeout(() => {
+		var square = document.querySelectorAll(".board__tile");
+		var tiles = Array.from(square);
+		Players.forEach((player, index) => {
+			for (let i = tiles.length - 1; i >= 0; i--) {
+				var playerTile = tiles[i].childNodes;
+				playerTile.forEach(function (tileElm) {
+					//remove player from last tile
+					if (!tileElm.classList.length == 0) {
+						if (tileElm.classList.contains(player.player)) {
+							tileElm.remove();
 						}
-					});
-					if (tiles[i].dataset.p == player.position) {
-						tiles[i].innerHTML += `<div class="board__player ${player.player}"><img src="${player.border}" style="background-Image:url(${player.savedCards.Image})"></div>`
-						
+					}
+				});
+				//Players position
+				if (tiles[i].dataset.p == player.position) {
+					tiles[i].innerHTML += `<div class="board__player ${player.player}">
+												<img src="${player.border}" style="background-Image:url(${player.savedCards.Image})">
+											</div>`
+
+				}
+			}
+			//tile traps
+			traps.forEach(trap => {
+				for (let i = tiles.length - 1; i >= 0; i--) {
+					if (player.position == trap.start) {
+						player.position = trap.end
 					}
 				}
-				traps.forEach(trap => {
-					for (let i = tiles.length - 1; i >= 0; i--) {
-						if (player.position == trap.start) {
-							player.position = trap.end
-						}
-					}
-				})
 			})
-		}, 1000, rolled(width / 2 - 15, height / 2 + 20, counter))
-	})
+		})
+	}, 1000)
 }
-
-
-//renderBoard();

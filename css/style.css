@@ -91,13 +91,16 @@ header img {
 }
 header a {
   display: block;
-  background-image: url(../../img/background-button-01.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: #3d3429;
+  border: solid 2px;
+  border-radius: 5px;
   padding: 15px 10px;
   width: 35%;
   height: auto;
   margin: auto;
+}
+header a:hover {
+  filter: hue-rotate(45deg);
 }
 header p {
   color: #ffffff;
@@ -156,6 +159,9 @@ header p {
     bottom: 5%;
     right: 1%;
   }
+}
+#modal .start_btn:hover {
+  filter: hue-rotate(45deg);
 }
 .container {
   background-image: url(../../img/brown-open-field-2305169.jpg);
@@ -227,18 +233,39 @@ header p {
   grid-template-rows: 1fr 2fr 3fr 4fr 5fr 6fr 7fr 8fr;
   grid-gap: 0.5rem;
 }
+.board p {
+  text-align: center;
+}
+.board span {
+  font-size: 40px;
+  text-align: center;
+  margin: auto;
+  vertical-align: bottom;
+  display: block;
+}
 .board__tile {
+  position: relative;
   width: 183px;
   height: 140px;
   background: #c7b299;
+  background-image: url(../../img/dark-denim-3.png);
+}
+.board__punish {
+  color: red;
+  background: #958573;
   background-image: url(../../img/dark-denim-3.png);
 }
 .board__center {
   grid-column: 2 / 8;
   grid-row: 2 / 6;
   display: grid;
-  /*grid-template-columns: subgrid;*/
   grid-template-rows: repeat(3, 1fr);
+  background-image: url(../../img/map.jpg);
+}
+.board__player {
+  position: absolute;
+  left: 18%;
+  top: 10%;
 }
 .board__player img {
   display: block;
@@ -248,6 +275,12 @@ header p {
   background-size: contain;
 }
 .board__dice {
-  width: 100px;
+  grid-row: 4;
+  width: 150px;
   height: 100px;
+}
+.board__dice #can {
+  position: relative;
+  bottom: 30px;
+  right: 100px;
 }

@@ -1,8 +1,14 @@
-html, body{
+html,
+body {
 	height: 100%;
 	margin: 0;
 }
-h1, h2, h3, h4, a{
+
+h1,
+h2,
+h3,
+h4,
+a {
 	font-family: 'Rokkitt', serif;
 	color: @gold;
 	text-shadow: 4px 0px @darkGold;
@@ -10,71 +16,96 @@ h1, h2, h3, h4, a{
 	letter-spacing: 3px;
 	font-weight: 200;
 	margin: 0;
-	@media @tablet{
+
+	@media @tablet {
 		text-shadow: 2px 0px @darkGold;
 	}
-	@media @phone{
+
+	@media @phone {
 		text-shadow: 2px 0px @darkGold;
 	}
 }
-p{
+
+p {
 	font-family: 'Open Sans';
 }
-h1{
+
+h1 {
 	font-size: 6vw;
 }
-h2{
-	font-size:	4vw;
+
+h2 {
+	font-size: 4vw;
 }
-a{
-	font-size: 3.5vw;	
+
+a {
+	font-size: 3.5vw;
 }
-header{
+
+header {
 	width: 1200px;
 	margin: auto;
+
 	//position: relative;
 	//top: 10%;
-	@media @tablet{
+	@media @tablet {
 		width: 90%;
 	}
-	@media @phone{
+
+	@media @phone {
 		width: 90%;
 	}
-	img{
+
+	img {
 		display: block;
 		margin: auto;
 		width: 350px;
-		@media @tablet{
-		width: 250px;
+
+		@media @tablet {
+			width: 250px;
+		}
+
+		@media @phone {
+			width: 200px;
+		}
 	}
-	@media @phone{
-		width: 200px;
-	}
-	}
-	a{
+
+	a {
 		display: block;
-		background-image: url(../../img/background-button-01.png);
-		background-repeat: no-repeat;
-		background-size: cover;
+		//background-image: url(../../img/background-button-01.png);
+		background: #3d3429;
+		//background-repeat: no-repeat;
+		//background-size: cover;
+		border: solid 2px;
+		border-radius: 5px;
 		padding: 15px 10px;
 		width: 35%;
 		height: auto;
 		margin: auto;
 	}
-	p{
+
+	a:hover {
+		filter: hue-rotate(45deg)
+	}
+
+	p {
 		color: @white;
 		width: 800px;
-		@media @tablet{
+
+		@media @tablet {
 			width: 80%;
 		}
-		@media @phone{
+
+		@media @phone {
 			width: 80%;
 		}
+
 		margin: 0px auto 25px;
 		text-align: center;
 	}
 }
-#modal{
+
+#modal {
 	display: none;
 	min-height: 100%;
 	width: 100%;
@@ -82,33 +113,43 @@ header{
 	top: 0;
 	margin: auto;
 	text-align: center;
-	background-color: rgba(0,0,0,0.9);
-	@media @tablet{
-			background-color: #000;
-		}
-		@media @phone{
-			background-color: #000;
-		}
-	.start_btn{
+	background-color: rgba(0, 0, 0, 0.9);
+
+	@media @tablet {
+		background-color: #000;
+	}
+
+	@media @phone {
+		background-color: #000;
+	}
+
+	.start_btn {
 		display: block;
 		position: relative;
 		top: 15%;
-		@media @tablet{
+
+		@media @tablet {
 			position: fixed;
 			top: initial;
 			bottom: 5%;
 			right: 1%;
 			font-size: 3vw;
 		}
-		@media @phone{
+
+		@media @phone {
 			position: fixed;
 			top: initial;
 			bottom: 5%;
 			right: 1%;
 		}
 	}
+
+	.start_btn:hover {
+		filter: hue-rotate(45deg);
+	}
 }
-.container{
+
+.container {
 	background-image: url(../../img/brown-open-field-2305169.jpg);
 	background-repeat: no-repeat;
 	width: 100%;
