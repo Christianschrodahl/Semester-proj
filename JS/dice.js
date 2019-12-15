@@ -1,165 +1,310 @@
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var counter = 6;
-var x = 0;
-const Points2D = function (x, y) {
-	this.x = x;
-	this.y = y;
-};
-const Point3D = function (x, y, z) {
-	this.x = x;
-	this.y = y;
-	this.z = z;
-}
-//size represents the width, height dept of the dice.
-const Dice = function (x, y, z, size) {
+//This is used for player dice Color to se if the dice has been rolled and then check player turn
+var diceColorTurn = false
 
-	Point3D.call(this, x, y, z);
+function DiceColor() {	
+	const element = document.querySelector('#canvasDice');
+	const animation = new Zdog.Illustration({
+		element,
+	});
+	const PI = Math.PI * 2;
+	// This Anchor is used for rotation
+	const dice = new Zdog.Anchor({
+		addTo: animation,
+	});
+	// group describing the faces through rounded rectangles
+	const faces = new Zdog.Group({
+		addTo: dice,
+	});
 
-	size *= 0.5;
+	var sides = new Zdog.Rect({
+		addTo: faces,
+		stroke: 30,
+		width: 30,
+		height: 30,
+		color: "#555",
+		translate: {
+			z: -15,
+		},
+	});
+	if (diceColorTurn == true) {
+		sides.color = (currentPlayerTurn == 0) ? "#0000ff" : "#d60000"
+	}
+	// rotate the faces around the center
+	sides.copy({
+		rotate: {
+			x: PI / 4,
+		},
+		translate: {
+			y: 15,
+		},
+	});
 
-	//All points of the Dice
-	this.vertices = [new Point3D(x - size, y - size, z - size),
-                    new Point3D(x + size, y - size, z - size),
-                    new Point3D(x + size, y + size, z - size),
-                    new Point3D(x - size, y + size, z - size),
-                    new Point3D(x - size, y - size, z + size),
-                    new Point3D(x + size, y - size, z + size),
-                    new Point3D(x + size, y + size, z + size),
-                    new Point3D(x - size, y + size, z + size)];
+	sides.copy({
+		rotate: {
+			x: PI / 4,
+		},
+		translate: {
+			y: -15,
+		},
+	});
 
-	//this is for each side of the dice. it refers to the vereces above.
-	this.faces = [[0, 1, 2, 3], [0, 4, 5, 1], [1, 5, 6, 2], [3, 2, 6, 7], [0, 3, 7, 4], [4, 7, 6, 5]];
-};
+	sides.copy({
+		translate: {
+			z: 15,
+		},
+	});
+	
+	const one = new Zdog.Ellipse({
+		addTo: dice,
+		diameter: 15,
+		stroke: false,
+		fill: true,
+		color: 'hsl(0, 0%, 100%)',
+		translate: {
+			z: 30,
+		},
+		value: 2,
+	});
 
-Dice.prototype = {
+	const two = new Zdog.Group({
+		addTo: dice,
+		rotate: {
+			x: PI / 4,
+		},
+		translate: {
+			y: 30,
+		},
+	});
 
-	rotateX: function (radian) {
+	one.copy({
+		addTo: two,
+		translate: {
+			y: 10,
+		},
+	});
 
-		var cosine = Math.cos(radian);
-		var sine = Math.sin(radian);
+	one.copy({
+		addTo: two,
+		translate: {
+			y: -10,
+		},
+	});
 
-		for (let i = this.vertices.length - 1; i > -1; --i) {
+	const three = new Zdog.Group({
+		addTo: dice,
+		rotate: {
+			y: PI / 4,
+		},
+		translate: {
+			x: 30,
+		},
+	});
 
-			let p = this.vertices[i];
-			let y = (p.y - this.y) * cosine - (p.z - this.z) * sine;
-			let z = (p.y - this.y) * sine + (p.z - this.z) * cosine;
-			p.y = y + this.y;
-			p.z = z + this.z;
+	one.copy({
+		addTo: three,
+		translate: {
+			z: 0,
+		},
+	});
 
+	one.copy({
+		addTo: three,
+		translate: {
+			x: 10,
+			y: -10,
+			z: 0,
+		},
+	});
+
+	one.copy({
+		addTo: three,
+		translate: {
+			x: -10,
+			y: 10,
+			z: 0,
+		},
+	});
+
+	const four = new Zdog.Group({
+		addTo: dice,
+		rotate: {
+			y: PI / 4,
+		},
+		translate: {
+			x: -30,
+		},
+	});
+
+	two.copyGraph({
+		addTo: four,
+		rotate: {
+			x: 0,
+		},
+		translate: {
+			x: 10,
+			y: 0,
+		},
+	});
+
+	two.copyGraph({
+		addTo: four,
+		rotate: {
+			x: 0,
+		},
+		translate: {
+			x: -10,
+			y: 0,
+		},
+	});
+
+	const five = new Zdog.Group({
+		addTo: dice,
+		rotate: {
+			x: PI / 4,
+		},
+		translate: {
+			y: -30,
+		},
+		result: 5
+	});
+
+	four.copyGraph({
+		addTo: five,
+		rotate: {
+			y: 0,
+		},
+		translate: {
+			x: 0,
+		},
+	});
+
+	one.copy({
+		addTo: five,
+		translate: {
+			z: 0,
+		},
+	});
+
+	const six = new Zdog.Group({
+		addTo: dice,
+		translate: {
+			z: -30,
+		},
+	});
+
+	two.copyGraph({
+		addTo: six,
+		rotate: {
+			x: 0,
+			z: PI / 4,
+		},
+		translate: {
+			x: 0,
+			y: 0,
+		},
+	});
+
+	four.copyGraph({
+		addTo: six,
+		rotate: {
+			y: 0,
+		},
+		translate: {
+			x: 0,
+		},
+	});
+	//This is a static illustration
+	animation.updateRenderGraph();
+
+	const rotation = {
+		x: 0,
+		y: 0,
+		z: 0,
+	};
+
+	// array describing the rotation necessary to highlight the difference faces
+
+	const rotate = [
+		{
+			x: 0,
+			y: 0,
+			value: 1
+    },
+		{
+			x: PI / 4,
+			y: 0,
+			value: 2,
+  },
+		{
+			x: 0,
+			y: PI / 4,
+			value: 3
+  },
+		{
+			x: 0,
+			y: (PI * 3) / 4,
+			value: 4
+  },
+		{
+			x: (PI * 3) / 4,
+			y: 0,
+			value: 5
+  },
+		{
+			x: PI / 2,
+			y: 0,
+			value: 6
+  },
+];
+	// utility function returning a positive integer up to a maximum value
+	const randomInt = (max = 6) => Math.floor(Math.random() * max);
+	// utility function returning a random item from an array
+	const randomItem = arr => arr[randomInt(arr.length)];
+	// function animating the dice according to the input x and y values
+	var roll = 0;
+
+	function rollDice({
+		x,
+		y,
+		value
+	}) {
+		// animate the object toward the input values
+		anime({
+			targets: rotation,
+			x: x + PI * randomInt(),
+			y: y + PI * randomInt(),
+			z: PI * randomInt(),
+			duration: 1000,
+
+			update() {
+				dice.rotate.x = rotation.x;
+				dice.rotate.y = rotation.y;
+				dice.rotate.z = rotation.z;
+				animation.updateRenderGraph();
+			},
+		});
+		roll = value;
+		renderBoard()
+	}
+
+	//Dice role, setting player position and checking who won.
+	window.roleDice = () => {
+		rollDice(randomItem(rotate))
+		var currentPlayer = Players[currentPlayerTurn];
+		currentPlayer.position += roll;
+		currentPlayerTurn++;
+		if (currentPlayerTurn >= Players.length) {
+			currentPlayerTurn = 0;
 		}
-
-	},
-	rotateY: function (radian) {
-		var cosine = Math.cos(radian);
-		var sine = Math.sin(radian);
-		for (let i = this.vertices.length - 1; i > -1; --i) {
-
-			let p = this.vertices[i];
-
-			let x = (p.z - this.z) * sine + (p.x - this.x) * cosine;
-			let z = (p.z - this.z) * cosine - (p.x - this.x) * sine;
-			p.x = x + this.x;
-			p.z = z + this.z;
+		if (currentPlayer.position >= 25) {
+			localStorage.setItem("Winner", JSON.stringify(currentPlayer));
+			if (localStorage.getItem("Winner")) {
+				document.location.href = "endGame.html";
+				hasWon = true;
+			}
 		}
-	}
-};
-
-var die = new Dice(0, 0, 80, 45);
-
-function project(points3d, width, height) {
-	var points2d = new Array(points3d.length);
-
-	var focal_length = 100;
-
-	for (let i = points3d.length - 1; i > -1; --i) {
-		let p = points3d[i];
-
-		let x = p.x * (focal_length / p.z) + width * 0.5;
-		let y = p.y * (focal_length / p.z) + height * 0.5;
-
-		points2d[i] = new Points2D(x, y);
-	}
-	return points2d;
-}
-var height;
-var width;
-async function animation() {
-	// window.requestAnimationFrame(animation);
-
-	height = document.querySelector(".board__dice").clientHeight;
-	width = document.querySelector(".board__dice").clientWidth;
-
-	ctx.canvas.height = height;
-	ctx.canvas.width = width;
-
-	ctx.fillStyle = "#333";
-	ctx.fillRect(0, 0, width, height);
-
-	die.rotateX(-0.03);
-	die.rotateY(0.03);
-	ctx.fillStyle = "red";
-
-	var vertices = project(die.vertices, width, height)
-	for (let i = die.faces.length - 1; i > -1; --i) {
-		let face = die.faces[i];
-
-		let p1 = die.vertices[face[0]];
-		let p2 = die.vertices[face[1]];
-		let p3 = die.vertices[face[2]];
-
-		let v1 = new Point3D(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z);
-		let v2 = new Point3D(p3.x - p1.x, p3.y - p1.y, p3.z - p1.z);
-
-		let normal = new Point3D(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.x, v1.x * v2.y - v1.y * v2.x);
-
-		if (-p1.x * normal.x + -p1.y * normal.y + -p1.z * normal.z <= 0) {
-			ctx.beginPath();
-			ctx.moveTo(vertices[face[0]].x, vertices[face[0]].y);
-			ctx.lineTo(vertices[face[1]].x, vertices[face[1]].y);
-			ctx.lineTo(vertices[face[2]].x, vertices[face[2]].y);
-			ctx.lineTo(vertices[face[3]].x, vertices[face[3]].y);
-			ctx.closePath();
-			ctx.fill();
-			ctx.stroke();
-		}
-	}
-
-	x++
-	if (x === 607) {
-		window.clearInterval(intervalID)
-		await renderBoard();
-	}
-}
-animation()
-rolled(width / 2 - 15, height / 2 + 20, counter)
-function rolled(x, y, count) {
-	return new Promise(resolve => {
-		ctx.beginPath();
-		ctx.font = "60px arial";
-		ctx.strokeText(count, x, y)
-		ctx.fill();
-	})
-}
-var intervalID;
-var hasWon = false;
-window.roleDice = () =222222222222> {
-	const max = 2;
-	const roll = Math.ceil(Math.random() * max);
-	x = 0
-	counter = roll;
-	intervalID = setInterval(function () {
-		animation();
-	}, 0.01);
-	var currentPlayer = Players[currentPlayerTurn];
-	currentPlayer.position += roll;
-	currentPlayerTurn++;
-	if (currentPlayerTurn >= Players.length) {
-		currentPlayerTurn = 0;
-	}
-	if (currentPlayer.position >= 25) {
-		alert("Player has won!");
-		hasWon = true;
+		diceColorTurn = true
 	}
 }
 
+DiceColor()

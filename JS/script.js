@@ -22,9 +22,15 @@ function createCard(card) {
 		cardArray.push({
 			"Name": playCard[i].name,
 			"Gender": playCard[i].gender,
-			"Image": "../img/token-0" + counter + ".png"
+			"Image": "img/token-0" + counter + ".png"
 		})
-		cards.innerHTML += "<div class='card__character' data-name='" + playCard[i].name + "'><div class='card__details'><img class='card__token' src='../img/token-0" + counter + ".png'><p class='card__charName'>" + playCard[i].name + "</p>" + "<p class='card__gender'>Gender: " + playCard[i].gender + "</p>" + "<p class='card__gender'>Culture: " + playCard[i].culture + "</p></div></div>"
+		cards.innerHTML += `<div class='card__character' data-name=' ${playCard[i].name} '>
+								<div class='card__details'><img class='card__token' src='img/token-0${counter}.png'>
+									<p class='card__charName'>${playCard[i].name}</p>
+									<p class='card__gender'>Gender:  ${playCard[i].gender}</p>
+									<p class='card__gender'>Culture: ${playCard[i].culture}</p>
+								</div>
+							</div>`
 		if (i % 2) {
 			counter += 1
 		}
@@ -76,10 +82,9 @@ function saveChosenCards() {
 	var storage = [];
 	var selectedCharacter1 = document.querySelector(".card__selectedPlayer1");
 	var selectedCharacter2 = document.querySelector(".card__selectedPlayer2");
-	//var cardImg;
 	var chosenPlayers = [selectedCharacter1, selectedCharacter2]
 	if (selectedCharacter1 !== null && selectedCharacter2 !== null) {
-		console.log(chosenPlayers)
+		document.querySelector(".start_btn").setAttribute("href", "board.html")
 		chosenPlayers.forEach((chosen, index) => {
 			savedCards.push(chosen.dataset.name);
 			cardArray.forEach((card, index) => {
@@ -90,9 +95,7 @@ function saveChosenCards() {
 				}
 			})
 		})
-		console.log(savedCards)
-		console.log("storage ", storage)
 		localStorage.setItem("Token", JSON.stringify(storage));
 	}
 }
-saveChosenCards()
+//saveChosenCards()
